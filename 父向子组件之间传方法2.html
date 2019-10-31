@@ -31,7 +31,7 @@
         },
         methods: {
           myclick() {
-            this.$emit("sonfunction");
+            this.$emit("sonfunction", { a: 1, b: 2 });
           }
         }
       };
@@ -42,8 +42,8 @@
           getMsgFromSon: null
         },
         methods: {
-          fatherfunction() {
-            console.log("这是父组件的方法！！！");
+          fatherfunction(data) {
+            console.log("这是父组件的方法！！！", data);
           }
         },
         components: { com1 }
