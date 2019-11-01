@@ -23,7 +23,7 @@
     </template>
     <script>
       const login = {
-        template: "<h1>Hello</h1>",
+        template: "#tmp1",
         data() {
           return { msg: "son msg" };
         },
@@ -38,15 +38,15 @@
         data: {},
         methods: {
           getElement() {
-            console.log(document.getElementById("myh3").innerText);
-            //  ref  是 英文单词 【reference】   值类型 和 引用类型  referenceError
+            //  ref  是 英文单词 【reference】   值类型 和 引用类型  reference Error
+
             console.log(this.$refs.myh3.innerText);
             console.log(this.$refs.mylogin.msg);
             this.$refs.mylogin.show();
-          },
-          components: {
-            login
           }
+        },
+        components: {
+          login
         }
       });
     </script>
