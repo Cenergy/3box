@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <router-link to="/account">Account</router-link>
+      <router-view></router-view>
+    </div>
+    <template id="tmp1">
+      <h1>
+        Hello Account <br />
+        <router-link to="/account/login">login</router-link>
+        <router-link to="/account/register">register</router-link>
+        <router-view></router-view>
+      </h1>
+    </template>
+    <script>
+      const account = {
+        template: "#tmp1"
+      };
+      const login = {
+        template: "<h3>login</h3>"
+      };
+      const register = {
+        template: "<h3>register</h3>"
+      };
+      const router = new VueRouter({
+        routes: [
+          {
+            path: "/account",
+            component: account,
+            children: [
+              {
+                path: "login",
+                component: login
+              },
+              {
+                path: "register",
+                component: register
+              }
+            ]
+          }
+        ]
+      });
+      const vm = new Vue({
+        el: "#app",
+        data: {},
+        router
+      });
+    </script>
+  </body>
+</html>
