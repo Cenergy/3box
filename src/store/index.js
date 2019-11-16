@@ -4,21 +4,17 @@ import axios from "axios";
 
 import * as types from "./types";
 
+import getters from "./getters";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     counter: 10,
-    data: 1
+    data: 1,
+    name: "cenergy"
   },
-  getters: {
-    squCounter(state) {
-      return state.counter * state.counter;
-    },
-    fourCounter(state, getters) {
-      return state.counter * state.counter + getters.squCounter;
-    }
-  },
+  getters,
   mutations: {
     [types.INCREMENT](state) {
       state.counter++;

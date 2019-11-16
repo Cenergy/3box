@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{name}},{{ msg }}</h1>
     <input type="button" value="+" @click="increment" />
     {{$store.state.counter}}
     {{$store.getters.squCounter}}
@@ -13,10 +13,17 @@
 
 <script>
 import * as types from "../store/types";
+import { mapState } from "vuex";
 export default {
-  name: "HelloWorld",
+  data() {
+    return { name: "hello world's data" };
+  },
   props: {
     msg: String
+  },
+
+  computed: {
+    ...mapState(["name"])
   },
   methods: {
     incrementCount(num) {
