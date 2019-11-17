@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <HelloWorld msg="Hello Vue!!!" />
-    <Topview msg="top view's msg" />
+    <Topview msg="top view's msg">
+      <h6>123456</h6>
+      <span slot="topviewslot">这不是slot的默认值</span>
+    </Topview>
   </div>
 </template>
 
