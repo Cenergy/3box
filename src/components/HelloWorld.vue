@@ -8,6 +8,13 @@
     <hr />
     <input type="button" value="获取" @click="getInfo('cenergy')" />
     {{$store.state.data}}
+    <hr />
+    {{$store.state.hello.hello}}
+    <input
+      type="button"
+      value="获取hello"
+      @click="getHelloInfo('cenergy')"
+    />
   </div>
 </template>
 
@@ -16,7 +23,7 @@ import * as types from "../store/types";
 import { mapState } from "vuex";
 export default {
   data() {
-    return { name: "hello world's data" };
+    return { name1: "hello world's data" };
   },
   props: {
     msg: String
@@ -36,6 +43,11 @@ export default {
       const res = await this.$store.dispatch("aGetUserInfo", name);
       // eslint-disable-next-line no-console
       console.log("Rd: getInfo -> res", res.id);
+    },
+    getHelloInfo(name1) {
+      // eslint-disable-next-line no-console
+      console.log("Go: getHelloInfo -> name1", name1);
+      this.$store.commit("getFullInfo", name1);
     }
   }
 };
