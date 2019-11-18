@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{name}},{{ msg }}</h1>
     <input type="button" value="+" @click="increment" />
     {{$store.state.counter}}
     {{$store.getters.squCounter}}
@@ -17,15 +17,29 @@
 
       <input type="button" value="修改" @click="asyncUpdateName" />
     </div>
+    <hr />
+    {{$store.state.hello.hello}}
+    <input
+      type="button"
+      value="获取hello"
+      @click="getHelloInfo('cenergy')"
+    />
   </div>
 </template>
 
 <script>
 import * as types from "../store/types";
+import { mapState } from "vuex";
 export default {
-  name: "HelloWorld",
+  data() {
+    return { name1: "hello world's data" };
+  },
   props: {
     msg: String
+  },
+
+  computed: {
+    ...mapState(["name"])
   },
   methods: {
     incrementCount(num) {
@@ -39,11 +53,18 @@ export default {
       // eslint-disable-next-line no-console
       console.log("Rd: getInfo -> res", res.id);
     },
+<<<<<<< HEAD
     updateName() {
       this.$store.commit("updateName", "lisi");
     },
     asyncUpdateName() {
       this.$store.dispatch("aUpdateName");
+=======
+    getHelloInfo(name1) {
+      // eslint-disable-next-line no-console
+      console.log("Go: getHelloInfo -> name1", name1);
+      this.$store.commit("getFullInfo", name1);
+>>>>>>> be06b86fb1fc55bc1062bab2922e1131070f1dac
     }
   }
 };

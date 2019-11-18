@@ -4,6 +4,9 @@ import axios from "axios";
 
 import * as types from "./types";
 
+import getters from "./getters";
+import hello from "./modules/hello";
+
 Vue.use(Vuex);
 
 /**
@@ -30,6 +33,13 @@ const moduleA = {
     // eslint-disable-next-line no-unused-vars
     getInfo3(state, getters, rootState) {
       return getters.getInfo2 + rootState.counter;
+    },
+    // 有点像filters,因为不会修改原数据，只会做一层包装。也有点像computed
+    squCounter(state) {
+      return state.counter * state.counter;
+    },
+    fourCounter(state, getters) {
+      return state.counter * state.counter + getters.squCounter;
     }
   },
   actions: {
@@ -51,15 +61,7 @@ export default new Vuex.Store({
     counter: 10,
     data: 1
   },
-  getters: {
-    // 有点像filters,因为不会修改原数据，只会做一层包装。也有点像computed
-    squCounter(state) {
-      return state.counter * state.counter;
-    },
-    fourCounter(state, getters) {
-      return state.counter * state.counter + getters.squCounter;
-    }
-  },
+  getters,
   mutations: {
     [types.INCREMENT](state) {
       state.counter++;
@@ -83,6 +85,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    a: moduleA
+    a: moduleA,
+    hello
   }
 });
