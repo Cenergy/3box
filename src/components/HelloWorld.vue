@@ -8,6 +8,15 @@
     <hr />
     <input type="button" value="获取" @click="getInfo('cenergy')" />
     {{$store.state.data}}
+    <div>
+      模块A中的数据：
+      {{$store.state.a.name}}
+      <!-- getters直接调用  mutation也是直接commit -->
+      {{$store.getters.getInfo3}}
+      <input type="button" value="获取" @click="updateName" />
+
+      <input type="button" value="修改" @click="asyncUpdateName" />
+    </div>
   </div>
 </template>
 
@@ -29,6 +38,12 @@ export default {
       const res = await this.$store.dispatch("aGetUserInfo", name);
       // eslint-disable-next-line no-console
       console.log("Rd: getInfo -> res", res.id);
+    },
+    updateName() {
+      this.$store.commit("updateName", "lisi");
+    },
+    asyncUpdateName() {
+      this.$store.dispatch("aUpdateName");
     }
   }
 };
