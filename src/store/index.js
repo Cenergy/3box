@@ -9,6 +9,14 @@ import hello from "./modules/hello";
 
 Vue.use(Vuex);
 
+// axios.defaults.baseURL='https://api.github.com/users/'
+// axios.defaults.timeout=5000
+
+const axiosInstance = axios.create({
+  baseURL: "https://api.github.com/",
+  timeout: 5000
+});
+
 /**
  * 想要修改state的数据，必须通过mutations
  * this.$store.state.
@@ -33,13 +41,6 @@ const moduleA = {
     // eslint-disable-next-line no-unused-vars
     getInfo3(state, getters, rootState) {
       return getters.getInfo2 + rootState.counter;
-    },
-    // 有点像filters,因为不会修改原数据，只会做一层包装。也有点像computed
-    squCounter(state) {
-      return state.counter * state.counter;
-    },
-    fourCounter(state, getters) {
-      return state.counter * state.counter + getters.squCounter;
     }
   },
   actions: {
@@ -82,6 +83,10 @@ export default new Vuex.Store({
         context.commit("updateInfo", data);
         resove(data);
       });
+    },
+    async aGetGithubUseInfo(context, username) {
+      const { data } = await axiosInstance.get(`users/${username}`);
+      context.commit("updateInfo", data);
     }
   },
   modules: {

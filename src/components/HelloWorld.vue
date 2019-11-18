@@ -20,6 +20,11 @@
     <hr />
     {{ $store.state.hello.hello }}
     <input type="button" value="获取hello" @click="getHelloInfo('cenergy')" />
+    <input
+      type="button"
+      value="github用户信息"
+      @click="getGithubUserInfo('MorvanZhou')"
+    />
   </div>
 </template>
 
@@ -48,6 +53,9 @@ export default {
       const res = await this.$store.dispatch("aGetUserInfo", name);
       // eslint-disable-next-line no-console
       console.log("Rd: getInfo -> res", res.id);
+    },
+    async getGithubUserInfo(username) {
+      await this.$store.dispatch("aGetGithubUseInfo", username);
     },
     updateName() {
       this.$store.commit("updateName", "lisi");
