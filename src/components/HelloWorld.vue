@@ -1,29 +1,25 @@
 <template>
   <div class="hello">
-    <h1>{{name}},{{ msg }}</h1>
+    <h1>{{ name }},{{ msg }}</h1>
     <input type="button" value="+" @click="increment" />
-    {{$store.state.counter}}
-    {{$store.getters.squCounter}}
-    {{$store.getters.fourCounter}}
+    {{ $store.state.counter }}
+    {{ $store.getters.squCounter }}
+    {{ $store.getters.fourCounter }}
     <hr />
     <input type="button" value="获取" @click="getInfo('cenergy')" />
-    {{$store.state.data}}
+    {{ $store.state.data }}
     <div>
       模块A中的数据：
-      {{$store.state.a.name}}
+      {{ $store.state.a.name }}
       <!-- getters直接调用  mutation也是直接commit -->
-      {{$store.getters.getInfo3}}
+      {{ $store.getters.getInfo3 }}
       <input type="button" value="获取" @click="updateName" />
 
       <input type="button" value="修改" @click="asyncUpdateName" />
     </div>
     <hr />
-    {{$store.state.hello.hello}}
-    <input
-      type="button"
-      value="获取hello"
-      @click="getHelloInfo('cenergy')"
-    />
+    {{ $store.state.hello.hello }}
+    <input type="button" value="获取hello" @click="getHelloInfo('cenergy')" />
   </div>
 </template>
 
@@ -53,18 +49,16 @@ export default {
       // eslint-disable-next-line no-console
       console.log("Rd: getInfo -> res", res.id);
     },
-<<<<<<< HEAD
     updateName() {
       this.$store.commit("updateName", "lisi");
     },
     asyncUpdateName() {
       this.$store.dispatch("aUpdateName");
-=======
+    },
     getHelloInfo(name1) {
       // eslint-disable-next-line no-console
       console.log("Go: getHelloInfo -> name1", name1);
       this.$store.commit("getFullInfo", name1);
->>>>>>> be06b86fb1fc55bc1062bab2922e1131070f1dac
     }
   }
 };
