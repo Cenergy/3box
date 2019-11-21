@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Hello Vue!!!" />
-    <Topview msg="top view's msg">
+    <!-- <HelloWorld msg="Hello Vue!!!" /> -->
+    <!-- <Topview msg="top view's msg">
       <h6>123456</h6>
       <span slot="topviewslot">这不是slot的默认值</span>
-    </Topview>
+    </Topview>-->
+
+    <router-link to="/home">首页</router-link>
+    <router-link to="/about">关于</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
