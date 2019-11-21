@@ -6,7 +6,7 @@
       <span slot="topviewslot">这不是slot的默认值</span>
     </Topview>-->
 
-    <router-link to="/home">首页</router-link>
+    <router-link to="/home" replace>首页</router-link>
     <router-link to="/about">关于</router-link>
     <router-view></router-view>
   </div>

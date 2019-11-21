@@ -20,7 +20,8 @@ const router = new VueRouter({
       component: About
     }
   ],
-  mode: "history"
+  mode: "history",
+  linkActiveClass: "active"
 });
 
 export default router;
