@@ -10,6 +10,7 @@
     <router-link to="/about">关于</router-link>
     <input type="button" value="到关于" @click="goAbout" />
     <router-link :to="'/user/' + userId" tag="p">用户</router-link>
+    <router-link :to="{path:'/profile',query:{name:'hello'}}">档案</router-link>
     <router-view></router-view>
   </div>
 </template>
