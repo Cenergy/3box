@@ -1,50 +1,39 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld msg="Hello Vue!!!" /> -->
-    <!-- <Topview msg="top view's msg">
-      <h6>123456</h6>
-      <span slot="topviewslot">这不是slot的默认值</span>
-    </Topview>-->
-
-    <router-link to="/home" replace>首页</router-link>
-    <router-link to="/about">关于</router-link>
-    <input type="button" value="到关于" @click="goAbout" />
-    <router-link :to="'/user/' + userId" tag="p">用户</router-link>
-    <router-link :to="{path:'/profile',query:{name:'hello'}}">档案</router-link>
-    <router-view></router-view>
+    <tab-bar>
+      <tab-bar-item>
+        <img src="./assets/img/tabbar/home.svg" alt slot="item-icon" />
+        <div class="tab-bar-item" slot="item-text">首页</div>
+      </tab-bar-item>
+      <tab-bar-item>
+        <img src="./assets/img/tabbar/category.svg" alt slot="item-icon" />
+        <div class="tab-bar-item" slot="item-text">分类</div>
+      </tab-bar-item>
+      <tab-bar-item>
+        <img src="./assets/img/tabbar/cart.svg" alt slot="item-icon" />
+        <div class="tab-bar-item" slot="item-text">购物车</div>
+      </tab-bar-item>
+      <tab-bar-item>
+        <img src="./assets/img/tabbar/profile.svg" alt slot="item-icon" />
+        <div class="tab-bar-item" slot="item-text">我的</div>
+      </tab-bar-item>
+    </tab-bar>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import Topview from "./components/topview";
-
+import TabBar from "./components/tabbar/TabBar";
+import TabBarItem from "./components/tabbar/TabBarItem";
 export default {
   name: "app",
   data() {
-    return {
-      userId: "zhangsan"
-    };
+    return {};
   },
-  components: {
-    HelloWorld,
-    Topview
-  },
-  methods: {
-    goAbout() {
-      this.$router.push("/about");
-    }
-  }
+  components: { TabBar, TabBarItem },
+  methods: {}
 };
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url("./assets/css/base.css");
 </style>
