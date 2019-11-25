@@ -11,19 +11,31 @@ const router = new VueRouter({
   routes: [
     {
       path: "/",
-      redirect: "/home"
+      redirect: "/home",
+      meta: {
+        title: "首页"
+      }
     },
     {
       path: "/home",
-      component: Home
+      component: Home,
+      meta: {
+        title: "首页"
+      }
     },
     {
       path: "/about",
-      component: About
+      component: About,
+      meta: {
+        title: "关于"
+      }
     },
     {
       path: "/user/:id",
-      component: User
+      component: User,
+      meta: {
+        title: "用户"
+      }
     },
     {
       path: "/profile",
@@ -32,6 +44,17 @@ const router = new VueRouter({
   ],
   mode: "history",
   linkActiveClass: "active"
+});
+// 路由守卫
+// 前置守卫
+router.beforeEach((to, from, next) => {
+  // 从from到to
+  document.title = to.matched[0].meta.title || "vuebox";
+  next();
+});
+// 后置钩子
+router.afterEach((to, from) => {
+  console.log("----------");
 });
 
 export default router;
