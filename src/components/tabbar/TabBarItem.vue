@@ -18,7 +18,7 @@ export default {
     return {};
   },
   props: {
-    link: String,
+    path: String,
     activeColor: {
       type: String,
       default: "blue"
@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     isActive() {
-      return !this.$route.path.indexOf(this.link);
+      return this.$route.path === this.path;
     },
     activeStyle() {
       return this.isActive ? { color: this.activeColor } : {};
@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     itemClick() {
-      if (this.$router.path !== this.link) {
-        this.$router.replace(this.link);
+      if (this.$router.path !== this.path) {
+        this.$router.push(this.path);
       }
     }
   }

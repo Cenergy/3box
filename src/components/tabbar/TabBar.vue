@@ -20,9 +20,4 @@ export default {};
   bottom: 0;
   box-shadow: 0px -2px 1px rgba(100, 100, 100, 0.1);
 }
-.tab-bar-item {
-  flex: 1;
-  text-align: center;
-  height: 49px;
-}
 </style>
