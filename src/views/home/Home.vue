@@ -8,7 +8,7 @@
         </a>
       </swiper-item>
     </swiper>
-    <div>首页11111111111111222</div>
+    <recommend-view :recommends="recommends"></recommend-view>
   </div>
 </template>
 
@@ -16,6 +16,7 @@
 import NavBar from "components/common/navbar/NavBar";
 import { getHomeMultidata } from "network/home";
 import { Swiper, SwiperItem } from "components/common/swiper";
+import RecommendView from "./childrenCom/RecommendView";
 export default {
   data() {
     return {
@@ -29,13 +30,14 @@ export default {
       console.log("Rd: created -> res", res);
       this.result = res;
       this.banners = res.data.banner.list;
-      this.recommends = res.data.recommend;
+      this.recommends = res.data.recommend.list;
     });
   },
   components: {
     NavBar,
     Swiper,
-    SwiperItem
+    SwiperItem,
+    RecommendView
   }
 };
 </script>
