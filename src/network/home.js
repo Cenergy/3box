@@ -1,20 +1,21 @@
-import axios from './axios'
+import axios from "./axios";
+import { request } from "./request";
 
-export const BANNER = 'banner'
-export const RECOMMEND = 'recommend'
+export const BANNER = "banner";
+export const RECOMMEND = "recommend";
 
 export function getHomeMultidata() {
   return axios({
-    url: '/home/multidata'
-  })
+    url: "/home/multidata"
+  });
 }
 
 export function getHomeData(type, page) {
   return axios({
-    url: '/home/data',
+    url: "/home/data",
     params: {
       type,
       page
     }
-  })
+  });
 }
