@@ -3,17 +3,23 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物车</div>
     </nav-bar>
-    <swiper>
-      <swiper-item v-for="item in banners" :key="item.id">
-        <a :href="item.link">
-          <img :src="item.image" alt />
-        </a>
-      </swiper-item>
-    </swiper>
-    <recommend-view :recommends="recommends"></recommend-view>
-    <tab-control :titles="tabControlTitles" class="home-tab-control" @tabClick="tabClicker" />
+    <scroll class="content">
+      <swiper>
+        <swiper-item v-for="item in banners" :key="item.id">
+          <a :href="item.link">
+            <img :src="item.image" alt />
+          </a>
+        </swiper-item>
+      </swiper>
+      <recommend-view :recommends="recommends"></recommend-view>
+      <tab-control
+        :titles="tabControlTitles"
+        class="home-tab-control"
+        @tabClick="tabClicker"
+      />
 
-    <goods-list :goods="goods[type].list" />
+      <goods-list :goods="goods[type].list" />
+    </scroll>
   </div>
 </template>
 
@@ -21,6 +27,7 @@
 import NavBar from "components/common/navbar/NavBar";
 import { getHomeMultidata, getHomeData } from "network/home";
 import { Swiper, SwiperItem } from "components/common/swiper";
+import Scroll from "components/common/scroll/Scroll";
 import RecommendView from "./childrenCom/RecommendView";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
@@ -71,7 +78,8 @@ export default {
     SwiperItem,
     RecommendView,
     GoodsList,
-    TabControl
+    TabControl,
+    Scroll
   }
 };
 </script>
@@ -83,5 +91,9 @@ export default {
 .home-tab-control {
   position: sticky;
   top: 0px;
+}
+.content {
+  height: 300px;
+  overflow: hidden;
 }
 </style>
