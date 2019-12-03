@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home" class="wrapper">
     <nav-bar class="nav-bar">
       <div slot="center">购物车</div>
     </nav-bar>
@@ -11,12 +11,9 @@
           </a>
         </swiper-item>
       </swiper>
+      <feature-view></feature-view>
       <recommend-view :recommends="recommends"></recommend-view>
-      <tab-control
-        :titles="tabControlTitles"
-        class="home-tab-control"
-        @tabClick="tabClicker"
-      />
+      <tab-control :titles="tabControlTitles" class="home-tab-control" @tabClick="tabClicker" />
 
       <goods-list :goods="goods[type].list" />
     </scroll>
@@ -28,9 +25,10 @@ import NavBar from "components/common/navbar/NavBar";
 import { getHomeMultidata, getHomeData } from "network/home";
 import { Swiper, SwiperItem } from "components/common/swiper";
 import Scroll from "components/common/scroll/Scroll";
-import RecommendView from "./childrenCom/RecommendView";
+import RecommendView from "./children/RecommendView";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
+import FeatureView from "./children/FeatureView";
 export default {
   data() {
     return {
@@ -77,6 +75,7 @@ export default {
     Swiper,
     SwiperItem,
     RecommendView,
+    FeatureView,
     GoodsList,
     TabControl,
     Scroll
@@ -84,16 +83,16 @@ export default {
 };
 </script>
 <style scoped>
+#home {
+  height: 100vh;
+}
 .nav-bar {
   background-color: var(--color-tint);
   color: #fff;
 }
-.home-tab-control {
-  position: sticky;
-  top: 0px;
-}
+
 .content {
-  height: 300px;
+  height: calc(100%-490px);
   overflow: hidden;
 }
 </style>
