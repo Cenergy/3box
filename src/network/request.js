@@ -1,8 +1,12 @@
 import axios from "axios";
 
+const url = "http://106.54.54.237:8000/api/v1";
+const url2 = "http://123.207.32.32:8000/api/vip";
+
 export function request(config) {
   const axiosInstance = axios.create({
-    baseURL: "http://123.207.32.32:8000",
+    // baseURL: "http://123.207.32.32:8000",
+    baseURL: url || url2,
     timeout: 5000
   });
   // axios的拦截器

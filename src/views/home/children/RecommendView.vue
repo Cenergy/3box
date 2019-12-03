@@ -2,7 +2,7 @@
   <div class="recommend">
     <div v-for="item in recommends" :key="item.id" class="recommend-item">
       <a :href="item.link" target="_blank">
-        <img :src="item.image" alt="" />
+        <img :src="item.image" alt />
         <div>{{ item.title }}</div>
       </a>
     </div>
