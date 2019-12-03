@@ -1,9 +1,9 @@
 <template>
-  <div id="home" class="wrapper">
+  <div id="home">
     <nav-bar class="nav-bar">
       <div slot="center">购物车</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <swiper>
         <swiper-item v-for="item in banners" :key="item.id">
           <a :href="item.link">
@@ -21,6 +21,9 @@
 
       <goods-list :goods="goods[type].list" />
     </scroll>
+    <back-top @click.native="backTop" class="back-top">
+      <img src="~assets/img/common/top.png" alt="" />
+    </back-top>
   </div>
 </template>
 
@@ -33,6 +36,7 @@ import RecommendView from "./children/RecommendView";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 import FeatureView from "./children/FeatureView";
+import BackTop from "content/backTop/BackTop";
 export default {
   data() {
     return {
@@ -72,6 +76,9 @@ export default {
       if (index === 0) this.type = "pop";
       if (index === 1) this.type = "new";
       if (index === 2) this.type = "sell";
+    },
+    backTop() {
+      this.$refs.scroll.scrollTo(0, 0, 300);
     }
   },
   components: {
@@ -82,7 +89,8 @@ export default {
     FeatureView,
     GoodsList,
     TabControl,
-    Scroll
+    Scroll,
+    BackTop
   }
 };
 </script>
@@ -96,7 +104,17 @@ export default {
 }
 
 .content {
-  height: calc(100%-490px);
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0px;
+  bottom: 49px;
   overflow: hidden;
+}
+
+.back-top {
+  position: fixed;
+  right: 10px;
+  bottom: 60px;
 }
 </style>
