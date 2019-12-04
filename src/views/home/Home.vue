@@ -3,7 +3,14 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物车</div>
     </nav-bar>
-    <scroll class="content" ref="scroll">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      @scrollPosition="contentScroll"
+      @scrollPullingUp="loadMore"
+      :pull-up-load="true"
+    >
       <swiper>
         <swiper-item v-for="item in banners" :key="item.id">
           <a :href="item.link">
@@ -13,16 +20,12 @@
       </swiper>
       <feature-view></feature-view>
       <recommend-view :recommends="recommends"></recommend-view>
-      <tab-control
-        :titles="tabControlTitles"
-        class="home-tab-control"
-        @tabClick="tabClicker"
-      />
+      <tab-control :titles="tabControlTitles" class="home-tab-control" @tabClick="tabClicker" />
 
       <goods-list :goods="goods[type].list" />
     </scroll>
-    <back-top @click.native="backTop" class="back-top">
-      <img src="~assets/img/common/top.png" alt="" />
+    <back-top @click.native="backTop" class="back-top" v-show="showBackTop">
+      <img src="~assets/img/common/top.png" alt />
     </back-top>
   </div>
 </template>
@@ -44,6 +47,7 @@ export default {
       banners: [],
       recommends: [],
       type: "pop",
+      showBackTop: false,
       tabControlTitles: ["流行", "新款", "精选"],
       goods: {
         pop: { page: 0, list: [] },
@@ -79,6 +83,14 @@ export default {
     },
     backTop() {
       this.$refs.scroll.scrollTo(0, 0, 300);
+    },
+    loadMore() {
+      this.getHomeDataObject(this.type);
+      this.$refs.scroll.finishPullUp();
+      console.log("Rd: loadMore -> loadMore");
+    },
+    contentScroll(position) {
+      this.showBackTop = -position.y > 1000;
     }
   },
   components: {

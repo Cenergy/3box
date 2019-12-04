@@ -11,7 +11,16 @@ import BScroll from "better-scroll";
 
 export default {
   name: "Scroll",
-  props: {},
+  props: {
+    probeType: {
+      type: Number,
+      default: 0
+    },
+    pullUpLoad: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       scroll: {}
@@ -19,12 +28,24 @@ export default {
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
-      pullUpLoad: true
+      pullUpLoad: this.pullUpLoad,
+      probeType: this.probeType,
+      click: true
+    });
+
+    this.scroll.on("scroll", position => {
+      this.$emit("scrollPosition", position);
+    });
+    this.scroll.on("pullingUp", () => {
+      this.$emit("scrollPullingUp");
     });
   },
   methods: {
     scrollTo(x, y, time = 500) {
       this.scroll.scrollTo(x, y, time);
+    },
+    finishPullUp() {
+      this.scroll.finishPullUp();
     }
   }
 };
