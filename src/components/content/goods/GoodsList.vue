@@ -9,7 +9,7 @@
         class="goods-list-item"
         v-for="(item, index) in goods"
       >
-        <img :src="item.show.img" />
+        <img :src="item.show.img" @load="imgLoad" />
         <!-- <img @load="imgLoad" alt v-lazy="showImage(index)" /> -->
         <div class="goods-info">
           <p>{{ item.title }}</p>

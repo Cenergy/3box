@@ -66,6 +66,11 @@ export default {
     this.getHomeDataObject("new");
     this.getHomeDataObject("sell");
   },
+  mounted() {
+    this.$bus.$on("imgLoad", () => {
+      this.debounce(this.$refs.scroll.refresh, 500);
+    });
+  },
   methods: {
     getHomeDataObject(type) {
       const page = this.goods[type].page + 1;
@@ -91,6 +96,16 @@ export default {
     },
     contentScroll(position) {
       this.showBackTop = -position.y > 1000;
+    },
+    debounce(fun, delay) {
+      let timer = null;
+      return function(...args) {
+        if (timer) clearInterval(timer);
+        timer = setTimeout(() => {
+          console.log("----------------------");
+          fun.apply(this, args);
+        }, delay);
+      };
     }
   },
   components: {
