@@ -40,6 +40,7 @@ import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 import FeatureView from "./children/FeatureView";
 import BackTop from "content/backTop/BackTop";
+import { debounce } from "@/common/utils";
 export default {
   data() {
     return {
@@ -68,7 +69,7 @@ export default {
   },
   mounted() {
     this.$bus.$on("imgLoad", () => {
-      this.debounce(this.$refs.scroll.refresh, 500);
+      debounce(this.$refs.scroll.refresh);
     });
   },
   methods: {
@@ -96,16 +97,6 @@ export default {
     },
     contentScroll(position) {
       this.showBackTop = -position.y > 1000;
-    },
-    debounce(fun, delay) {
-      let timer = null;
-      return function(...args) {
-        if (timer) clearInterval(timer);
-        timer = setTimeout(() => {
-          console.log("----------------------");
-          fun.apply(this, args);
-        }, delay);
-      };
     }
   },
   components: {
