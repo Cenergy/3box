@@ -86,6 +86,7 @@ export default {
   width: 48%;
   padding-bottom: 40px;
   position: relative;
+  cursor: pointer;
 }
 .goods-list-item img {
   width: 100%;

@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+
     <tab-bar>
       <tab-bar-item link="/home" activeColor="red">
         <img src="~assets/img/tabbar/home.svg" alt slot="icon" />
@@ -9,11 +12,7 @@
       </tab-bar-item>
       <tab-bar-item link="/category">
         <img src="~assets/img/tabbar/category.svg" alt slot="icon" />
-        <img
-          src="~assets/img/tabbar/category_active.svg"
-          alt
-          slot="active-icon"
-        />
+        <img src="~assets/img/tabbar/category_active.svg" alt slot="active-icon" />
         <div slot="item-text">分类</div>
       </tab-bar-item>
       <tab-bar-item link="/cart">
@@ -23,11 +22,7 @@
       </tab-bar-item>
       <tab-bar-item link="/profile">
         <img src="~assets/img/tabbar/profile.svg" alt slot="icon" />
-        <img
-          src="~assets/img/tabbar/profile_active.svg"
-          alt
-          slot="active-icon"
-        />
+        <img src="~assets/img/tabbar/profile_active.svg" alt slot="active-icon" />
         <div slot="item-text">我的</div>
       </tab-bar-item>
     </tab-bar>

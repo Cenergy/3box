@@ -3,6 +3,13 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物车</div>
     </nav-bar>
+    <tab-control
+      :titles="tabControlTitles"
+      class="home-tab-control"
+      @tabClick="tabClicker"
+      ref="tabControl1"
+      v-show="isTabControlFixed"
+    />
     <scroll
       class="content"
       ref="scroll"
@@ -14,13 +21,13 @@
       <swiper>
         <swiper-item v-for="item in banners" :key="item.id">
           <a :href="item.link">
-            <img :src="item.image" alt />
+            <img :src="item.image" alt @load="swiperImageLoad" />
           </a>
         </swiper-item>
       </swiper>
       <feature-view></feature-view>
       <recommend-view :recommends="recommends"></recommend-view>
-      <tab-control :titles="tabControlTitles" class="home-tab-control" @tabClick="tabClicker" />
+      <tab-control :titles="tabControlTitles" @tabClick="tabClicker" ref="tabControl2" />
 
       <goods-list :goods="goods[type].list" />
     </scroll>
@@ -54,7 +61,10 @@ export default {
         pop: { page: 0, list: [] },
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
-      }
+      },
+      hasSwiperImageLoaded: false,
+      isTabControlFixed: false,
+      topOffset: 0
     };
   },
   created() {
@@ -86,6 +96,8 @@ export default {
       if (index === 0) this.type = "pop";
       if (index === 1) this.type = "new";
       if (index === 2) this.type = "sell";
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
     },
     backTop() {
       this.$refs.scroll.scrollTo(0, 0, 300);
@@ -97,6 +109,13 @@ export default {
     },
     contentScroll(position) {
       this.showBackTop = -position.y > 1000;
+      this.isTabControlFixed = -position.y > this.topOffset;
+    },
+    swiperImageLoad() {
+      if (!this.hasSwiperImageLoaded) {
+        this.topOffset = this.$refs.tabControl2.$el.offsetTop;
+        this.hasSwiperImageLoaded = true;
+      }
     }
   },
   components: {
@@ -120,7 +139,10 @@ export default {
   background-color: var(--color-tint);
   color: #fff;
 }
-
+.home-tab-control {
+  position: relative;
+  z-index: 9;
+}
 .content {
   position: absolute;
   top: 44px;
