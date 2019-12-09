@@ -1,7 +1,20 @@
 <!--  -->
 <template>
   <div class>
-    <detail-nav-bar slot="center"></detail-nav-bar>
+    <nav-bar>
+      <div slot="left" class="detail-nav-bar-left" @click="detailNavBarLeft">
+        &lt;
+      </div>
+      <div slot="center" class="detail-nav-bar">
+        <span
+          v-for="(item, index) in titles"
+          :key="index"
+          :class="{ active: index === currentIndex }"
+          @click="detailNavBarClicked(index)"
+          >{{ item }}</span
+        >
+      </div>
+    </nav-bar>
   </div>
 </template>
 
@@ -9,16 +22,23 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 
-import DetailNavBar from "views/detail/children/DetailNavBar";
+import NavBar from "components/common/navbar/NavBar";
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
-    DetailNavBar
+    NavBar
+  },
+  props: {
+    titles: {
+      type: Array,
+      default() {
+        return ["商品", "参数", "评论", "推荐"];
+      }
+    }
   },
   data() {
     //这里存放数据
     return {
-      titles: ["商品", "参数", "评论", "推荐"],
       currentIndex: 0
     };
   },
@@ -48,4 +68,20 @@ export default {
   activated() {} //如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
-<style scoped></style>
+<style scoped>
+.detail-nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+}
+.detail-nav-bar span {
+  flex: 1;
+  cursor: pointer;
+}
+.active {
+  color: red;
+}
+.detail-nav-bar-left {
+  font-size: 20px;
+  color: rgb(11, 180, 236);
+}
+</style>
