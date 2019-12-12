@@ -2,17 +2,14 @@
 <template>
   <div class>
     <nav-bar>
-      <div slot="left" class="detail-nav-bar-left" @click="detailNavBarLeft">
-        &lt;
-      </div>
+      <div slot="left" class="detail-nav-bar-left" @click="detailNavBarLeft">&lt;</div>
       <div slot="center" class="detail-nav-bar">
         <span
           v-for="(item, index) in titles"
           :key="index"
           :class="{ active: index === currentIndex }"
           @click="detailNavBarClicked(index)"
-          >{{ item }}</span
-        >
+        >{{ item }}</span>
       </div>
     </nav-bar>
   </div>
@@ -23,10 +20,16 @@
 //例如：import 《组件名称》 from '《组件路径》';
 
 import NavBar from "components/common/navbar/NavBar";
+import { Swiper, SwiperItem } from "components/common/swiper";
+import Scroll from "common/scroll/Scroll";
+
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
-    NavBar
+    NavBar,
+    Scroll,
+    Swiper,
+    SwiperItem
   },
   props: {
     titles: {
@@ -39,6 +42,15 @@ export default {
   data() {
     //这里存放数据
     return {
+      iid: "",
+      topImages: [],
+      goods: {},
+      shop: {},
+      detailInfo: {},
+      paramInfo: {},
+      commentInfo: {},
+      recommendList: [],
+      themeTops: [],
       currentIndex: 0
     };
   },

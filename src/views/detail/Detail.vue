@@ -2,6 +2,7 @@
 <template>
   <div class>
     <detail-nav-bar slot="center"></detail-nav-bar>
+    <detail-swiper :swiper-list="topImages" class="detail-set-scroll" />
   </div>
 </template>
 
@@ -10,10 +11,19 @@
 //例如：import 《组件名称》 from '《组件路径》';
 
 import DetailNavBar from "views/detail/children/DetailNavBar";
+import DetailSwiper from "views/detail/children/DetailSwiper";
+import {
+  getDetail,
+  getRecommend,
+  Goods,
+  Shop,
+  GoodsParam
+} from "network/detail";
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
-    DetailNavBar
+    DetailNavBar,
+    DetailSwiper
   },
   data() {
     //这里存放数据
@@ -36,7 +46,15 @@ export default {
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    const iid = this.$route.query.iid;
+    this.iid = iid;
+    getDetail(iid).then(res => {
+      console.log("Rd: created -> res", res);
+      const data = res.result;
+      this.topImages = data.itemInfo.topImages;
+    });
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前
