@@ -1,11 +1,10 @@
 import { request } from "./request";
 
 export function getDetail(iid) {
+  console.log("Rd: getDetail -> iid", iid);
   return request({
     url: "/detail",
-    params: {
-      iid
-    }
+    params: { iid }
   });
 }
 

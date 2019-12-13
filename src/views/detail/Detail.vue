@@ -2,7 +2,7 @@
 <template>
   <div class>
     <detail-nav-bar slot="center"></detail-nav-bar>
-    <detail-swiper :swiper-list="topImages" class="detail-set-scroll" />
+    <detail-swiper :images="topImages" class="detail-set-scroll" />
   </div>
 </template>
 
@@ -29,9 +29,12 @@ export default {
     //这里存放数据
     return {
       titles: ["商品", "参数", "评论", "推荐"],
-      currentIndex: 0
+      currentIndex: 0,
+      detailId: "",
+      topImages: []
     };
   },
+
   //监听属性 类似于data概念
   computed: {},
   //监控data中的数据变化
@@ -43,17 +46,23 @@ export default {
     },
     detailNavBarLeft() {
       this.$router.go(-1);
+    },
+    getProductDetail() {
+      getDetail(this.detailId).then(res => {
+        const data = res.result;
+
+        // 获取轮播图数据
+        this.topImages = data.itemInfo.topImages;
+        console.log("Rd: getProductDetail -> this.topImages", this.topImages);
+        // 获取商品数据,调用封装的ES6的class
+      });
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    const iid = this.$route.query.iid;
-    this.iid = iid;
-    getDetail(iid).then(res => {
-      console.log("Rd: created -> res", res);
-      const data = res.result;
-      this.topImages = data.itemInfo.topImages;
-    });
+    const iid = this.$route.params.id;
+    this.detailId = this.$route.params.id;
+    this.getProductDetail();
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
