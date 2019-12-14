@@ -20,6 +20,7 @@ import {
   GoodsParam
 } from "network/detail";
 export default {
+  name: "Deatil",
   //import引入的组件需要注入到对象中才能使用
   components: {
     DetailNavBar,
