@@ -40,6 +40,9 @@ export default {
       isActive: true
     };
   },
+  created() {
+    this.$nextTick(() => {});
+  },
   components: { TabBar, TabBarItem },
   methods: {}
 };
