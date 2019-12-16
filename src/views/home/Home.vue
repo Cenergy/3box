@@ -48,6 +48,7 @@ import GoodsList from "@/components/content/goods/GoodsList";
 import FeatureView from "./children/FeatureView";
 import BackTop from "content/backTop/BackTop";
 import { debounce } from "@/common/utils";
+import { helloMixin } from "@/common/mixin";
 export default {
   data() {
     return {
@@ -77,6 +78,7 @@ export default {
     this.getHomeDataObject("new");
     this.getHomeDataObject("sell");
   },
+  mixins: [helloMixin],
   mounted() {
     this.$bus.$on("imgLoad", () => {
       debounce(this.$refs.scroll.refresh);
@@ -93,6 +95,7 @@ export default {
       });
     },
     tabClicker(index) {
+      this.hello();
       if (index === 0) this.type = "pop";
       if (index === 1) this.type = "new";
       if (index === 2) this.type = "sell";

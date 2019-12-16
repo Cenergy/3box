@@ -9,8 +9,8 @@
         class="goods-list-item"
         v-for="(item, index) in goods"
       >
-        <img :src="item.show.img" @load="imgLoad" />
         <!-- <img @load="imgLoad" alt v-lazy="showImage(index)" /> -->
+        <img @load="imgLoad" alt />
         <div class="goods-info">
           <p>{{ item.title }}</p>
           <span class="price">¥{{ item.price }}</span>
@@ -65,33 +65,37 @@ export default {
 
 <style scoped>
 @import "../../../assets/css/base.css";
+
 .goods-list-box {
   width: 100%;
 }
+
 .goods-list-box p {
   font-size: 15px;
   padding-left: 10px;
   margin-top: 10px;
 }
+
 .goods-list {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* justify-content: space-between; */
-  justify-content: space-evenly;
-  /* padding: 10px; */
+  justify-content: space-between;
+  padding: 10px;
 }
+
 .goods-list-item {
   width: 48%;
   padding-bottom: 40px;
   position: relative;
-  cursor: pointer;
 }
+
 .goods-list-item img {
   width: 100%;
   border-radius: 5px;
 }
+
 .goods-info {
   font-size: 14px;
   position: absolute;
@@ -101,19 +105,23 @@ export default {
   overflow: hidden;
   text-align: center;
 }
+
 .goods-info p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 3px;
 }
+
 .goods-info .price {
   color: var(--color-high-text);
   margin-right: 30px;
 }
+
 .goods-info .collect {
   position: relative;
 }
+
 .goods-info .collect::before {
   content: "";
   position: absolute;
