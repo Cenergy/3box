@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Add a GeoJSON polygon</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2VuZXJneSIsImEiOiJjajBjYWdsYnMwNGM1MnFsY21xcTc2d3ZjIn0.nOvNpzuvlXEObCK7xcb5oQ";
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/dark-v10",
+        center: [120.20374, 30.200638],
+        zoom: 12
+      });
+
+      map.on("load", function() {
+        map.addLayer({
+          id: "maine",
+          type: "fill",
+          source: {
+            type: "geojson",
+            data: {
+              type: "Feature",
+              geometry: {
+                type: "Polygon",
+                coordinates: [
+                  [
+                    [120.20374, 30.200638],
+                    [120.190351, 30.189473],
+                    [120.213332, 30.177046],
+                    [120.222237, 30.190994],
+                    [120.217559, 30.199452],
+                    [120.20374, 30.200638]
+                  ]
+                ]
+              }
+            }
+          },
+          layout: {},
+          paint: {
+            "fill-color": "#088",
+            "fill-opacity": 0.8
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
